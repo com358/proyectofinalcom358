@@ -2,8 +2,12 @@ from Appcoder import views
 from django.urls import path
 
 urlpatterns = [
-    path('inicio/', views.inicio, name='inicio'),
-    path('formularioUsuarios', views.FormularioUsuarios, name= 'formularioUsuarios'),
+    path('', views.inicio, name='inicio'),
+    path('buscar/', views.buscar),
+    path('busquedavisitantes',views.busquedaVisitantes, name= 'busquedaVisitantes'),
+    path('formulariovisitantes', views.formularioVisitantes, name= 'formularioVisitantes'),
+    path('formulariousuarios', views.formularioUsuarios, name= 'formularioUsuarios'),
+    path('formulariomoderadores', views.formularioModeradores, name= 'formularioModeradores'),
     path('rojo', views.rojo, name='rojo'),
     path('azul', views.azul, name='azul'),
     path('verde', views.verde, name='verde'),

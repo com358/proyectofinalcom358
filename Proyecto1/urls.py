@@ -21,6 +21,6 @@ from Proyecto1.views import saludo, otra_vista, probando_template
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Appcoder/', include('Appcoder.urls')),
+    path('', include('Appcoder.urls')),
 
 ]

@@ -5,11 +5,11 @@ from Appcoder.forms import FormularioVisitantes, FormularioUsuarios, FormularioM
 
 # Create your views here.
 
-def formularioVisitantes(request):
+def formularioVisitantes(req):
 
-      if request.method == "POST":
+      if req.method == "POST":
 
-            miFormularioVisitantes = FormularioVisitantes(request.POST) 
+            miFormularioVisitantes = FormularioVisitantes(req.POST) 
 
             print(miFormularioVisitantes)
  
@@ -17,34 +17,109 @@ def formularioVisitantes(request):
 
                   informacion = miFormularioVisitantes.cleaned_data
 
-                  visitante = Visitantes(nombre=informacion["nombre"], color_favorito=informacion["color_favorito"])
+                  visitante = Visitantes(nombre= informacion["nombre"], color_favorito= informacion["color_favorito"])
 
                   visitante.save()
 
-                  return render(request, "C:/Users/Tomás/entorno_virtual/Appcoder/templates/appcoder/inicio.html")
+                  return render(req, "appcoder/inicio.html")
 
       else:
 
             miFormularioVisitantes = FormularioVisitantes()
 
 
-      return render(request, "C:/Users/Tomás/entorno_virtual/Appcoder/templates/appcoder/formulariovisitantes.html", {"miFormularioVisitantes": miFormularioVisitantes})
+      return render(req, "appcoder/formulariovisitantes.html", {"miFormularioVisitantes": miFormularioVisitantes})
 
+
+
+def formularioUsuarios(req):
+
+      if req.method == "POST":
+
+            miFormularioUsuarios = FormularioUsuarios(req.POST) 
+
+            print(miFormularioUsuarios)
+ 
+            if miFormularioUsuarios.is_valid:
+
+                  informacion = miFormularioUsuarios.cleaned_data
+
+                  usuario = Usuarios(nombre= informacion["nombre"], edad= informacion["informacion"], mail= informacion["mail"], color_favorito= informacion["color_favorito"])
+
+                  usuario.save()
+
+                  return render(req, "appcoder/inicio.html")
+
+      else:
+
+            miFormularioUsuarios = FormularioUsuarios()
+
+
+      return render(req, "appcoder/formularioUsuarios.html", {"miFormularioUsuarios": miFormularioUsuarios})
+
+
+
+
+def formularioModeradores(req):
+
+      if req.method == "POST":
+
+            miFormularioModeradores = FormularioModeradores(req.POST) 
+
+            print(miFormularioModeradores)
+ 
+            if miFormularioModeradores.is_valid:
+
+                  informacion = miFormularioModeradores.cleaned_data
+
+                  visitante = Moderadores(nombre= informacion["nombre"],mail= informacion["mail"], password= informacion["password"])
+
+                  visitante.save()
+
+                  return render(req, "appcoder/inicio.html")
+
+      else:
+
+            miFormularioModeradores = FormularioModeradores()
+
+
+      return render(req, "appcoder/formularioModeradores.html", {"miFormularioModeradores": miFormularioModeradores})
+
+def busquedaVisitantes(req):
+     return render(req, "appcoder/busquedaVisitantes.html"),
+
+def buscar(req):
+     
+     if req.GET['nombre']:
+          
+          nombre= req.GET['nombre']
+
+          color_favorito= Visitantes.objects.filter(nombre__icontains=nombre)
+
+          return render(req, "appcoder/resultadoBusqueda.html", {"nombre": nombre, "color_favorito": color_favorito})
+     
+     else:
+        
+        respuesta = "Falta enviar datos."
+
+        
+     return HttpResponse(respuesta)
+          
 
 def inicio(req):
-    return render(req, "C:/Users/Tomás/entorno_virtual/Appcoder/templates/appcoder/inicio.html")
+    return render(req, "appcoder/inicio.html")
 
 def rojo(req):
-    return render(req, "C:/Users/Tomás/entorno_virtual/Appcoder/templates/appcoder/rojo.html")
+    return render(req, "appcoder/rojo.html")
 
 def azul(req):
-    return render(req, "C:/Users/Tomás/entorno_virtual/Appcoder/templates/appcoder/azul.html")
+    return render(req, "appcoder/azul.html")
 
 def verde(req):
-    return render(req, "C:/Users/Tomás/entorno_virtual/Appcoder/templates/appcoder/verde.html")
+    return render(req, "appcoder/verde.html")
 
 def amarillo(req):
-    return render(req, "C:/Users/Tomás/entorno_virtual/Appcoder/templates/appcoder/amarillo.html")
+    return render(req, "appcoder/amarillo.html")
 
 
 
