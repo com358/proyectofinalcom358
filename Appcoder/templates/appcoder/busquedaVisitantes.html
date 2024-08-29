@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/Appcoder/buscar" method="GET">
+    <form action="/Appcoder/buscar" method="GET">{% csrf_token %} 
 
     <input type="number" name="nombre" id="nombre">
     <input type="submit" value="Buscar">

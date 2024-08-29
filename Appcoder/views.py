@@ -86,7 +86,7 @@ def formularioModeradores(req):
       return render(req, "appcoder/formularioModeradores.html", {"miFormularioModeradores": miFormularioModeradores})
 
 def busquedaVisitantes(req):
-     return render(req, "appcoder/busquedaVisitantes.html"),
+     return render(req, "appcoder/busquedaVisitantes.html")
 
 def buscar(req):
      
