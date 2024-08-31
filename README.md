@@ -1,7 +1,5 @@
 # repositorio proyecto
  
- Bienvenid@ a mi proyecto. puedes visitar /rojo, /azul, /amarillo y /verde para ver herencia de html.
- Para registrar un visitante, usuario o moderador puedes visitar /formulariousuarios, /formulariovisitantes y /formulariomoderadores.
- Para buscar visitantes puedes ir a /busquedavisitantes.
+ Bienvenid@ a mi proyecto. Puedes registrar distintas clases usando la barra de navegación. También puedes buscar visitantes con el botón de buscar visitantes.
 
  admin keys: usuario: tomas contraseña: kh358days
