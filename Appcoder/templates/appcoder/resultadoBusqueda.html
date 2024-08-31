@@ -6,14 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+{% if color_favorito %}
 
-    <p>Buscando: {{ visitantes }}</p>{% csrf_token %} 
+    <p>Buscando: {{ nombre }}</p>{% csrf_token %} 
 
-{% if visitantes in visitantess %}
+
 <ul>
-{% for nombre in visitantes %}
-  <li> {{visitante.nombre}}</li>
-  <li> {{visitante.color_favorito}}</li>
+{% for color_favorito in color_favorito %}
+  <li> {{color_favorito.nombre}}</li>
+  <li> {{color_favorito.color_favorito}}</li>
 {% endfor %}
 
 </ul>

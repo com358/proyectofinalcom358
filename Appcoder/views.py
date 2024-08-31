@@ -95,9 +95,9 @@ def buscar(req):
      
      if req.GET['nombre']:
           
-          nombre= req.GET['nombre']
+          nombre = req.GET['nombre']
 
-          color_favorito= Visitantes.objects.filter(nombre__icontains=nombre)
+          color_favorito = Visitantes.objects.filter(nombre__icontains=nombre)
 
           return render(req, "appcoder/resultadoBusqueda.html", {"nombre": nombre, "color_favorito": color_favorito})
      
@@ -107,10 +107,9 @@ def buscar(req):
 
         
      return HttpResponse(respuesta)
-          
 
 def inicio(req):
-    return render(req, "appcoder/busquedavisitantes.html")
+    return render(req, "appcoder/inicio.html")
 
 def rojo(req):
     return render(req, "appcoder/rojo.html")
@@ -123,7 +122,3 @@ def verde(req):
 
 def amarillo(req):
     return render(req, "appcoder/amarillo.html")
-
-
-
-
