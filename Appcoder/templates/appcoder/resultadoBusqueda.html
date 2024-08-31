@@ -7,9 +7,9 @@
 </head>
 <body>
 
-    <p>Buscando: {{ visitante }}</p>{% csrf_token %} 
+    <p>Buscando: {{ visitantes }}</p>{% csrf_token %} 
 
-{% if nombre %}
+{% if visitantes in visitantess %}
 <ul>
 {% for nombre in visitantes %}
   <li> {{visitante.nombre}}</li>

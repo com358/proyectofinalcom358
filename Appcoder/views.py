@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from Appcoder.models import Visitantes, Usuarios, Moderadores
 from Appcoder.forms import FormularioVisitantes, FormularioUsuarios, FormularioModeradores
 
 # Create your views here.
-
+@csrf_exempt
 def formularioVisitantes(req):
 
       if req.method == "POST":
@@ -21,7 +22,7 @@ def formularioVisitantes(req):
 
                   visitante.save()
 
-                  return render(req, "appcoder/inicio.html")
+                  return render(req, "appcoder/busquedavisitantes.html")
 
       else:
 
@@ -31,7 +32,7 @@ def formularioVisitantes(req):
       return render(req, "appcoder/formulariovisitantes.html", {"miFormularioVisitantes": miFormularioVisitantes})
 
 
-
+@csrf_exempt
 def formularioUsuarios(req):
 
       if req.method == "POST":
@@ -44,11 +45,11 @@ def formularioUsuarios(req):
 
                   informacion = miFormularioUsuarios.cleaned_data
 
-                  usuario = Usuarios(nombre= informacion["nombre"], edad= informacion["informacion"], mail= informacion["mail"], color_favorito= informacion["color_favorito"])
+                  usuario = Usuarios(nombre= informacion["nombre"], mail= informacion["mail"], color_favorito= informacion["color_favorito"])
 
                   usuario.save()
 
-                  return render(req, "appcoder/inicio.html")
+                  return render(req, "appcoder/busquedavisitantes.html")
 
       else:
 
@@ -59,7 +60,7 @@ def formularioUsuarios(req):
 
 
 
-
+@csrf_exempt
 def formularioModeradores(req):
 
       if req.method == "POST":
@@ -76,7 +77,7 @@ def formularioModeradores(req):
 
                   visitante.save()
 
-                  return render(req, "appcoder/inicio.html")
+                  return render(req, "appcoder/busquedavisitantes.html")
 
       else:
 
@@ -85,9 +86,11 @@ def formularioModeradores(req):
 
       return render(req, "appcoder/formularioModeradores.html", {"miFormularioModeradores": miFormularioModeradores})
 
+@csrf_exempt
 def busquedaVisitantes(req):
      return render(req, "appcoder/busquedaVisitantes.html")
 
+@csrf_exempt
 def buscar(req):
      
      if req.GET['nombre']:
@@ -107,7 +110,7 @@ def buscar(req):
           
 
 def inicio(req):
-    return render(req, "appcoder/inicio.html")
+    return render(req, "appcoder/busquedavisitantes.html")
 
 def rojo(req):
     return render(req, "appcoder/rojo.html")

@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
-    <form action="/Appcoder/buscar" method="GET">{% csrf_token %} 
+</head> {% extends "Appcoder/padre.html" %}  {% load static %}
 
-    <input type="number" name="nombre" id="nombre">
+<body>
+    {% block contenidoQueCambia %} ESTE ES EL INICIO,
+    busqueda visitantes: 
+    <form action="/appcoder/forms.py/buscar" method="GET">
+        {% csrf_token %} 
+
+    <input type="text" name="nombre" id="nombre">
     <input type="submit" value="Buscar">
 
     </form>
+    {%endblock%}
 </body>
 </html>
