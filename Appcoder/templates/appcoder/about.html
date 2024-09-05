@@ -8,17 +8,8 @@
 </head>
 <body>
     {% block contenidoQueCambia %}
-    <form action="" method="POST"> 
-   
-     <table>
-        {% csrf_token %}
-        formulario visitantes:
-            {{ miFormularioVisitantes.as_table }}
-
-        </table>
-        <input type="submit" value="Enviar">
-    </form>   
-    {%endblock%}
-    
+    <h1>About me</h1>
+    Bienvenido a mi página about me! Mi nombre es Tomás vivo en Uruguay. Decidí hacer este curso de coder porque siempre me ha interesado la programación, y
+    {% endblock %}
 </body>
 </html>

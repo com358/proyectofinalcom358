@@ -8,7 +8,8 @@
 
 <body>
     {% block contenidoQueCambia %}
-    Ingresa el nombre del visitante: 
+    Ingresa el nombre del visitante:
+    {% csrf_token %} 
     <form action="buscar/" method="GET">
 
     <input type="text" name="nombre" id="nombre">

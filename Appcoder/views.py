@@ -3,9 +3,11 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Appcoder.models import Visitantes, Usuarios, Moderadores
 from Appcoder.forms import FormularioVisitantes, FormularioUsuarios, FormularioModeradores
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
-@csrf_exempt
+@login_required
 def formularioVisitantes(req):
 
       if req.method == "POST":
@@ -31,8 +33,7 @@ def formularioVisitantes(req):
 
       return render(req, "appcoder/formulariovisitantes.html", {"miFormularioVisitantes": miFormularioVisitantes})
 
-
-@csrf_exempt
+@login_required
 def formularioUsuarios(req):
 
       if req.method == "POST":
@@ -59,8 +60,7 @@ def formularioUsuarios(req):
       return render(req, "appcoder/formularioUsuarios.html", {"miFormularioUsuarios": miFormularioUsuarios})
 
 
-
-@csrf_exempt
+@login_required
 def formularioModeradores(req):
 
       if req.method == "POST":
@@ -86,10 +86,12 @@ def formularioModeradores(req):
 
       return render(req, "appcoder/formularioModeradores.html", {"miFormularioModeradores": miFormularioModeradores})
 
+@login_required
 @csrf_exempt
 def busquedaVisitantes(req):
      return render(req, "appcoder/busquedaVisitantes.html")
 
+@login_required
 @csrf_exempt
 def buscar(req):
      
@@ -111,14 +113,5 @@ def buscar(req):
 def inicio(req):
     return render(req, "appcoder/inicio.html")
 
-def rojo(req):
-    return render(req, "appcoder/rojo.html")
-
-def azul(req):
-    return render(req, "appcoder/azul.html")
-
-def verde(req):
-    return render(req, "appcoder/verde.html")
-
-def amarillo(req):
-    return render(req, "appcoder/amarillo.html")
+def aboutme(req):
+      return render(req, "appcoder/about.html")

@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 class FormularioVisitantes(forms.Form):
     nombre = forms.CharField(max_length=15)

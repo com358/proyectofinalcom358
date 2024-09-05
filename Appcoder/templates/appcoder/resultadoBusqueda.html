@@ -8,9 +8,9 @@
 <body>
 {% if color_favorito %}
 
-    <p>Buscando: {{ nombre }}</p>{% csrf_token %} 
+    <p>Buscando: {{ nombre }}</p>
 
-
+    {% csrf_token %}
 <ul>
 {% for color_favorito in color_favorito %}
   <li> {{color_favorito.nombre}}</li>

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Appcoder',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Proyecto1.urls'
+
+LOGOUT_REDIRECT_URL = 'appcoder/inicio.html' 
+
+LOGIN_URL = 'users/accounts/login/'
+
 
 TEMPLATES = [
     {
