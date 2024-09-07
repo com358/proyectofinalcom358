@@ -1,4 +1,4 @@
-# repositorio proyecto
+# Repositorio Proyecto
  
  Bienvenid@ a mi proyecto. Este es un blog con visitantes, usuarios y moderadores.
 
