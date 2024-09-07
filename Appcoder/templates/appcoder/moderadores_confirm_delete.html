@@ -1,0 +1,22 @@
+{% extends 'appcoder/padre.html' %}
+
+{% load static %}
+
+
+{% block contenidoQueCambia %}
+    
+
+
+<form method="POST">
+    {% csrf_token %}
+    <div align="center">
+    ¿Estás segur@ que deseas borrar a {{ object.nombre }}, {{object.mail}}, {{ object.password }}?
+
+    <input type="submit" value="Borrar">
+    </div>
+</form>
+
+
+
+
+{% endblock %}

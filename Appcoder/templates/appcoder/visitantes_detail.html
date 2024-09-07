@@ -1,0 +1,14 @@
+{% extends 'appcoder/padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<div align="center">
+
+NOMBRE: {{ visitantes.nombre }}, COLOR FAVORITO: {{visitantes.color_favorito}}<br>
+<button type="button" class="btn"><a href="{% url 'VisitantesList' %}">Regresar</a></button>
+
+</div>
+
+{% endblock %}

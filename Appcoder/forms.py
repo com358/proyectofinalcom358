@@ -1,20 +1,20 @@
 from django import forms
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from Appcoder.models import Visitantes, Usuarios, Moderadores
 
-class FormularioVisitantes(forms.Form):
-    nombre = forms.CharField(max_length=15)
-    color_favorito = forms.CharField(max_length=15)
+class FormularioVisitantes(forms.ModelForm):
+   class Meta:
+       model = Visitantes
+       fields = ['nombre', 'color_favorito'] 
 
-class FormularioUsuarios(forms.Form):
-    nombre =forms.CharField(max_length=15)
-    mail = forms.EmailField(max_length=35)
-    color_favorito = forms.CharField(max_length=15)
+class FormularioUsuarios(forms.ModelForm):
+   class Meta:
+       model = Usuarios
+       fields = ['nombre', 'mail', 'color_favorito'] 
 
-class FormularioModeradores(forms.Form):
-    nombre =forms.CharField(max_length=15)
-    mail = forms.EmailField(max_length=35)
-    password = forms.CharField(max_length=35)   
+class FormularioModeradores(forms.ModelForm):
+   class Meta:
+       model = Moderadores
+       fields = ['nombre', 'mail', 'password'] 
 
 class Buscar(forms.Form):
     query = forms.CharField( max_length=35)

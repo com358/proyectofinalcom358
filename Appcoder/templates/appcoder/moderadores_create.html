@@ -1,0 +1,35 @@
+{% extends 'appcoder/padre.html' %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% block contenidoQueCambia %}
+<div align="center">
+
+
+<form method="POST">
+    {% csrf_token %}
+    <div>Nombre:{{ form.nombre }}</div>
+
+    <div>Mail:{{ form.mail }}</div>
+    
+    <div>Password:{{ form.password }}</div>
+    
+    <input type="submit" value="Enviar">
+</div>
+</form>
+
+
+
+
+{% endblock %}
+</body>
+</html>

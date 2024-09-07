@@ -1,0 +1,31 @@
+{% extends 'appcoder/padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<div align="center">
+    {% if object_list %}
+        <div class="row">
+            {% for usuarios in object_list %}
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ usuarios.nombre }}</h5>
+                        <p class="card-text">Mail: {{ usuarios.mail }}</p>
+                        <p class="card-text">Color favorito: {{ usuarios.color_favorito }}</p>
+                        <a href="{% url 'UsuariosDetail' usuarios.id %}" class="btn btn-primary">Ver</a>
+                        <a href="{% url 'UsuariosUpdate' usuarios.id %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'UsuariosDelete' usuarios.id %}" class="btn btn-primary">Borrar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Falta agregar usuarios.</p>
+    {% endif %}
+</div>
+
+<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'UsuariosCreate' %}">Agregar nuevo</a>
+
+{% endblock %}

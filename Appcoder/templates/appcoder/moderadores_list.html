@@ -1,0 +1,31 @@
+{% extends 'appcoder/padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<div align="center">
+    {% if object_list %}
+        <div class="row">
+            {% for moderadores in object_list %}
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ moderadores.nombre }}</h5>
+                        <p class="card-text">Mail: {{ moderadores.mail }}</p>
+                        <p class="card-text">Password: {{ moderadores.password }}</p>
+                        <a href="{% url 'ModeradoresDetail' moderadores.id %}" class="btn btn-primary">Ver</a>
+                        <a href="{% url 'ModeradoresUpdate' moderadores.id %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'ModeradoresDelete' moderadores.id %}" class="btn btn-primary">Borrar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Falta agregar moderadores.</p>
+    {% endif %}
+</div>
+
+<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'ModeradoresCreate' %}">Agregar nuevo</a>
+
+{% endblock %}

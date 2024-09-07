@@ -1,0 +1,30 @@
+{% extends 'appcoder/padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<div align="center">
+    {% if object_list %}
+        <div class="row">
+            {% for visitantes in object_list %}
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ visitantes.nombre }}</h5>
+                        <p class="card-text">Color favorito: {{ visitantes.color_favorito }}</p>
+                        <a href="{% url 'VisitantesDetail' visitantes.id %}" class="btn btn-primary">Ver</a>
+                        <a href="{% url 'VisitantesUpdate' visitantes.id %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'VisitantesDelete' visitantes.id %}" class="btn btn-primary">Borrar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Falta agregar visitantes.</p>
+    {% endif %}
+    
+    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'VisitantesCreate' %}">Agregar nuevo</a>
+</div>
+
+{% endblock %}

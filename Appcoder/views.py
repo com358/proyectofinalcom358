@@ -1,114 +1,97 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 from Appcoder.models import Visitantes, Usuarios, Moderadores
-from Appcoder.forms import FormularioVisitantes, FormularioUsuarios, FormularioModeradores
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.views.generic.edit import DeleteView, CreateView, UpdateView
+from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 
-# Create your views here.
-@login_required
-def formularioVisitantes(req):
+#VISITANTES #################################
+class VisitantesListView(LoginRequiredMixin, ListView):
+    model = Visitantes
+    template_name = "appcoder/visitantes_list.html"
 
-      if req.method == "POST":
+class VisitantesCreateView(LoginRequiredMixin,CreateView):
+    model = Visitantes
+    template_name = 'appcoder/visitantes_create.html'
+    fields = ["nombre", "color_favorito"]
+    success_url=reverse_lazy("VisitantesList")
 
-            miFormularioVisitantes = FormularioVisitantes(req.POST) 
+class VisitantesDetailView(LoginRequiredMixin,DetailView):
+      model = Visitantes
+      template_name = "appcoder/visitantes_detail.html"
 
-            print(miFormularioVisitantes)
- 
-            if miFormularioVisitantes.is_valid:
+class VisitantesUpdateView(LoginRequiredMixin, UpdateView):
+    model = Visitantes
+    success_url = reverse_lazy("VisitantesList")
+    fields = ["nombre", "color_favorito"]
+    template_name = "appcoder/visitantes_update.html"
 
-                  informacion = miFormularioVisitantes.cleaned_data
+class VisitantesDeleteView(LoginRequiredMixin, DeleteView):
+    model = Visitantes
+    success_url = reverse_lazy("VisitantesList")
+    template_name = 'appcoder/visitantes_confirm_delete.html'
 
-                  visitante = Visitantes(nombre= informacion["nombre"], color_favorito= informacion["color_favorito"])
+#############################################
 
-                  visitante.save()
+#USUARIOS #################################
+class UsuariosListView(LoginRequiredMixin, ListView):
+    model = Usuarios
+    template_name = "appcoder/usuarios_list.html"
 
-                  return render(req, "appcoder/busquedavisitantes.html")
+class UsuariosCreateView(LoginRequiredMixin,CreateView):
+    model = Usuarios
+    template_name = 'appcoder/usuarios_create.html'
+    fields = ["nombre","mail","color_favorito"]
+    success_url=reverse_lazy("UsuariosList")
 
-      else:
+class UsuariosDetailView(LoginRequiredMixin,DetailView):
+      model = Usuarios
+      template_name = "appcoder/usuarios_detail.html"
 
-            miFormularioVisitantes = FormularioVisitantes()
+class UsuariosUpdateView(LoginRequiredMixin, UpdateView):
+    model = Usuarios
+    success_url = reverse_lazy("UsuariosList")
+    fields = ["nombre","mail","color_favorito"]
+    template_name = "appcoder/usuarios_update.html"
 
+class UsuariosDeleteView(LoginRequiredMixin, DeleteView):
+    model = Usuarios
+    success_url = reverse_lazy("UsuariosList")
+    template_name = 'appcoder/usuarios_confirm_delete.html'
 
-      return render(req, "appcoder/formulariovisitantes.html", {"miFormularioVisitantes": miFormularioVisitantes})
+#############################################
 
-@login_required
-def formularioUsuarios(req):
+#MODERADORES #################################
+class ModeradoresListView(LoginRequiredMixin, ListView):
+    model = Moderadores
+    template_name = "appcoder/moderadores_list.html"
 
-      if req.method == "POST":
+class ModeradoresCreateView(LoginRequiredMixin,CreateView):
+    model = Moderadores
+    template_name = 'appcoder/moderadores_create.html'
+    fields = ['nombre', 'mail', 'password'] 
+    success_url=reverse_lazy("ModeradoresList")
 
-            miFormularioUsuarios = FormularioUsuarios(req.POST) 
+class ModeradoresDetailView(LoginRequiredMixin,DetailView):
+      model = Moderadores
+      template_name = "appcoder/moderadores_detail.html"
 
-            print(miFormularioUsuarios)
- 
-            if miFormularioUsuarios.is_valid:
+class ModeradoresUpdateView(LoginRequiredMixin, UpdateView):
+    model = Moderadores
+    success_url = reverse_lazy("ModeradoresList")
+    fields = ['nombre', 'mail', 'password'] 
+    template_name = "appcoder/moderadores_update.html"
 
-                  informacion = miFormularioUsuarios.cleaned_data
+class ModeradoresDeleteView(LoginRequiredMixin, DeleteView):
+    model = Moderadores
+    success_url = reverse_lazy("ModeradoresList")
+    template_name = 'appcoder/moderadores_confirm_delete.html'
 
-                  usuario = Usuarios(nombre= informacion["nombre"], mail= informacion["mail"], color_favorito= informacion["color_favorito"])
-
-                  usuario.save()
-
-                  return render(req, "appcoder/busquedavisitantes.html")
-
-      else:
-
-            miFormularioUsuarios = FormularioUsuarios()
-
-
-      return render(req, "appcoder/formularioUsuarios.html", {"miFormularioUsuarios": miFormularioUsuarios})
-
-
-@login_required
-def formularioModeradores(req):
-
-      if req.method == "POST":
-
-            miFormularioModeradores = FormularioModeradores(req.POST) 
-
-            print(miFormularioModeradores)
- 
-            if miFormularioModeradores.is_valid:
-
-                  informacion = miFormularioModeradores.cleaned_data
-
-                  visitante = Moderadores(nombre= informacion["nombre"],mail= informacion["mail"], password= informacion["password"])
-
-                  visitante.save()
-
-                  return render(req, "appcoder/busquedavisitantes.html")
-
-      else:
-
-            miFormularioModeradores = FormularioModeradores()
-
-
-      return render(req, "appcoder/formularioModeradores.html", {"miFormularioModeradores": miFormularioModeradores})
-
-@login_required
-@csrf_exempt
-def busquedaVisitantes(req):
-     return render(req, "appcoder/busquedaVisitantes.html")
-
-@login_required
-@csrf_exempt
-def buscar(req):
-     
-     if req.GET['nombre']:
-          
-          nombre = req.GET['nombre']
-
-          color_favorito = Visitantes.objects.filter(nombre__icontains=nombre)
-
-          return render(req, "appcoder/resultadoBusqueda.html", {"nombre": nombre, "color_favorito": color_favorito})
-     
-     else:
-        
-        respuesta = "Falta enviar datos."
-
-        
-     return HttpResponse(respuesta)
+#############################################
 
 def inicio(req):
     return render(req, "appcoder/inicio.html")

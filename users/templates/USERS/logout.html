@@ -10,10 +10,13 @@
 </head>
 <body> 
     {% block contenidoQueCambia %}
+    <div align="center">
+
     <form action="{% url 'Logout' %}" method="post">
         {% csrf_token %} 
         <button type="submit">Logout</button>
     </form>
+    </div>
     {% endblock %}
 </body>
 </html>
